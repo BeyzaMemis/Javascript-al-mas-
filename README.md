@@ -1,2 +1,2 @@
-# Javascript-al-mas-
+# Javascript Çalışması
 Baykar
