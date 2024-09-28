@@ -245,8 +245,7 @@ section .option-list .option:last-child{
 
 section .option-list .option:hover{
     color: #004085;
-    background: #f1d0ff;
-    border: 1px solid #b8daff;
+    border: 1px solid #004085;
 }
 
 section .option-list .option.select{
