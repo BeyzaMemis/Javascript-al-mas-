@@ -245,20 +245,14 @@ section .option-list .option:last-child{
 
 section .option-list .option:hover{
     color: #004085;
-    background: #e7ccff;
+    background: #f1d0ff;
     border: 1px solid #b8daff;
 }
 
-section .option-list .option.correct{
+section .option-list .option.select{
     color: #155724;
     background: #d4edda;
     border: 1px solid #c3e6cb;
-}
-
-section .option-list .option.incorrect{
-    color: #721c24;
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
 }
 
 section .option-list .option.disabled{
@@ -275,17 +269,6 @@ section .option-list .option .icon{
     pointer-events: none;
     transition: all 0.3s ease;
     line-height: 24px;
-}
-.option-list .option .icon.tick{
-    color: #23903c;
-    border-color: #23903c;
-    background: #d4edda;
-}
-
-.option-list .option .icon.cross{
-    color: #a42834;
-    background: #f8d7da;
-    border-color: #a42834;
 }
 
 footer{
@@ -357,25 +340,13 @@ footer button.show{
 
 .result-box .icon{
     font-size: 100px;
-    color: #00cccc;
+    color: #e7da1f;
     margin-bottom: 10px;
 }
 
 .result-box .complete-text{
     font-size: 20px;
     font-weight: 500;
-}
-
-.result-box .score-text span{
-    display: flex;
-    margin: 10px 0;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.result-box .score-text span p{
-    padding: 0 4px;
-    font-weight: 600;
 }
 
 .result-box .buttons{

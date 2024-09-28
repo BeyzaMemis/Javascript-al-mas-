@@ -35,28 +35,8 @@ let counterLine;
 let widthValue = 0;
 let answers = [];
 
-const restart_quiz = result_box.querySelector(".buttons .restart");
-const quit_quiz = result_box.querySelector(".buttons .quit");
 
-// if restartQuiz button clicked
-restart_quiz.onclick = ()=>{
-    quiz_box.classList.add("activeQuiz"); //show quiz box
-    result_box.classList.remove("activeResult"); //hide result box
-    timeValue = 30; 
-    que_count = 0;
-    que_numb = 1;
-    userScore = 0;
-    widthValue = 0;
-    answers= [];
-    showQuetions(que_count); //calling showQestions function
-    queCounter(que_numb); //passing que_numb value to queCounter
-    clearInterval(counter); //clear counter
-    clearInterval(counterLine); //clear counterLine
-    startTimer(timeValue); //calling startTimer function
-    startTimerLine(widthValue); //calling startTimerLine function
-    timeText.textContent = "Time Left"; //change the text of timeText to Time Left
-    next_btn.classList.remove("show"); //hide the next button
-}
+const quit_quiz = result_box.querySelector(".buttons .quit");
 
 // if quitQuiz button clicked
 quit_quiz.onclick = ()=>{
@@ -121,8 +101,8 @@ function optionSelected(answer){
     clearInterval(counter); //clear counter
     clearInterval(counterLine); //clear counterLine
     const userAns = answer.textContent.split(")")[0]; //getting user selected option
-    answers.push(userAns)
-    answer.classList.add("correct"); 
+    answers.push({questionNumber:que_numb, answer:userAns})
+    answer.classList.add("select"); 
     const allOptions = option_list.children.length; //getting all option items
     for(i=0; i < allOptions; i++){
         option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
@@ -134,18 +114,26 @@ function showResult(){
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.remove("activeQuiz"); //hide quiz box
     result_box.classList.add("activeResult"); //show result box
-    const scoreText = result_box.querySelector(".score-text");
-    console.log("results", answers)
     const tableBody = document.querySelector('.result-table tbody');
+    tableBody.innerHTML = ""; 
 
-    for (let i = 0; i < answers.length; i++) {
+    for (let i = 0; i < questions.length; i++) {
         // Create a new table row
         const row = document.createElement('tr');     
-        // Insert question, user's answer, and correct answer into the row
-        row.innerHTML = `
-          <td>${i + 1}. </td>
-          <td>${answers[i]}</td>
-        `;
+        // Insert question, user's answer, and correct answer into the row,
+        try{
+            if(answers[i].questionNumber === i+1){
+                row.innerHTML = `
+                <td>${answers[i].questionNumber}. </td>
+                <td>${answers[i].answer}</td>
+              `;
+            }
+        }catch{
+            row.innerHTML = `
+            <td>${i+1}. </td>
+            <td>No answer</td>
+          `;
+        }
         // Append the row to the table body
         tableBody.appendChild(row);
     }
@@ -156,7 +144,7 @@ function startTimer(time){
     function timer(){
         timeCount.textContent = time; //changing the value of timeCount with time value
         time--; //decrement the time value
-        if(time < 30){
+        if(time < 20){
             const allOptions = option_list.children.length;
             for(i=0; i < allOptions; i++){
                 option_list.children[i].classList.remove("disabled");
